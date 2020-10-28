@@ -2138,7 +2138,7 @@ COMMANDS
 
               ;; Budget
               ~ monthly
-                income  $2000
+                income  $-2000
                 expenses:food    $400
                 expenses:bus     $50
                 expenses:movies  $30
@@ -2146,7 +2146,7 @@ COMMANDS
 
               ;; Two months worth of expenses
               2017-11-01
-                income  $1950
+                income  $-1950
                 expenses:food    $396
                 expenses:bus     $49
                 expenses:movies  $30
@@ -2154,7 +2154,7 @@ COMMANDS
                 assets:bank:checking
 
               2017-12-01
-                income  $2100
+                income  $-2100
                 expenses:food    $412
                 expenses:bus     $53
                 expenses:gifts   $100
@@ -2165,18 +2165,17 @@ COMMANDS
               $ hledger balance -M --budget
               Budget performance in 2017/11/01-2017/12/31:
 
-                                    ||                      Nov                       Dec
+                                    ||                      Nov                       Dec 
               ======================++====================================================
-               assets               || $-2445 [  99% of $-2480]  $-2665 [ 107% of $-2480]
-               assets:bank          || $-2445 [  99% of $-2480]  $-2665 [ 107% of $-2480]
-               assets:bank:checking || $-2445 [  99% of $-2480]  $-2665 [ 107% of $-2480]
-               expenses             ||   $495 [ 103% of   $480]    $565 [ 118% of   $480]
-               expenses:bus         ||    $49 [  98% of    $50]     $53 [ 106% of    $50]
-               expenses:food        ||   $396 [  99% of   $400]    $412 [ 103% of   $400]
-               expenses:movies      ||    $30 [ 100% of    $30]       0 [   0% of    $30]
-               income               ||  $1950 [  98% of  $2000]   $2100 [ 105% of  $2000]
+               assets:bank:checking ||  $1455 [  96% of  $1520]   $1535 [ 101% of  $1520] 
+               expenses             ||   $495 [ 103% of   $480]    $565 [ 118% of   $480] 
+               expenses:bus         ||    $49 [  98% of    $50]     $53 [ 106% of    $50] 
+               expenses:food        ||   $396 [  99% of   $400]    $412 [ 103% of   $400] 
+               expenses:movies      ||    $30 [ 100% of    $30]       0 [   0% of    $30] 
+               income               || $-1950 [  98% of $-2000]  $-2100 [ 105% of $-2000] 
               ----------------------++----------------------------------------------------
-                                    ||      0 [              0]       0 [              0]
+                                    ||      0 [              0]       0 [              0] 
+
 
        This is different from a normal balance report in several ways:
 
@@ -2205,38 +2204,34 @@ COMMANDS
               $ hledger balance -M --budget --empty
               Budget performance in 2017/11/01-2017/12/31:
 
-                                    ||                      Nov                       Dec
+                                    ||                      Nov                       Dec 
               ======================++====================================================
-               assets               || $-2445 [  99% of $-2480]  $-2665 [ 107% of $-2480]
-               assets:bank          || $-2445 [  99% of $-2480]  $-2665 [ 107% of $-2480]
-               assets:bank:checking || $-2445 [  99% of $-2480]  $-2665 [ 107% of $-2480]
-               expenses             ||   $495 [ 103% of   $480]    $565 [ 118% of   $480]
-               expenses:bus         ||    $49 [  98% of    $50]     $53 [ 106% of    $50]
-               expenses:food        ||   $396 [  99% of   $400]    $412 [ 103% of   $400]
-               expenses:gifts       ||      0                      $100
-               expenses:movies      ||    $30 [ 100% of    $30]       0 [   0% of    $30]
-               expenses:supplies    ||    $20                         0
-               income               ||  $1950 [  98% of  $2000]   $2100 [ 105% of  $2000]
+               assets:bank:checking ||  $1455 [  96% of  $1520]   $1535 [ 101% of  $1520] 
+               expenses             ||   $495 [ 103% of   $480]    $565 [ 118% of   $480] 
+               expenses:bus         ||    $49 [  98% of    $50]     $53 [ 106% of    $50] 
+               expenses:food        ||   $396 [  99% of   $400]    $412 [ 103% of   $400] 
+               expenses:gifts       ||      0                      $100                   
+               expenses:movies      ||    $30 [ 100% of    $30]       0 [   0% of    $30] 
+               expenses:supplies    ||    $20                         0                   
+               income               || $-1950 [  98% of $-2000]  $-2100 [ 105% of $-2000] 
               ----------------------++----------------------------------------------------
-                                    ||      0 [              0]       0 [              0]
+                                    ||      0 [              0]       0 [              0] 
 
        You can roll over unspent budgets to next period with --cumulative:
 
               $ hledger balance -M --budget --cumulative
               Budget performance in 2017/11/01-2017/12/31:
 
-                                    ||                      Nov                       Dec
+                                    ||               2017-11-30                2017-12-31 
               ======================++====================================================
-               assets               || $-2445 [  99% of $-2480]  $-5110 [ 103% of $-4960]
-               assets:bank          || $-2445 [  99% of $-2480]  $-5110 [ 103% of $-4960]
-               assets:bank:checking || $-2445 [  99% of $-2480]  $-5110 [ 103% of $-4960]
-               expenses             ||   $495 [ 103% of   $480]   $1060 [ 110% of   $960]
-               expenses:bus         ||    $49 [  98% of    $50]    $102 [ 102% of   $100]
-               expenses:food        ||   $396 [  99% of   $400]    $808 [ 101% of   $800]
-               expenses:movies      ||    $30 [ 100% of    $30]     $30 [  50% of    $60]
-               income               ||  $1950 [  98% of  $2000]   $4050 [ 101% of  $4000]
+               assets:bank:checking ||  $1455 [  96% of  $1520]   $2990 [  98% of  $3040] 
+               expenses             ||   $495 [ 103% of   $480]   $1060 [ 110% of   $960] 
+               expenses:bus         ||    $49 [  98% of    $50]    $102 [ 102% of   $100] 
+               expenses:food        ||   $396 [  99% of   $400]    $808 [ 101% of   $800] 
+               expenses:movies      ||    $30 [ 100% of    $30]     $30 [  50% of    $60] 
+               income               || $-1950 [  98% of $-2000]  $-4050 [ 101% of $-4000] 
               ----------------------++----------------------------------------------------
-                                    ||      0 [              0]       0 [              0]
+                                    ||      0 [              0]       0 [              0] 
 
        For more examples, see Budgeting and Forecasting.
 
